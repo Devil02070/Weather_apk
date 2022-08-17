@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="wave1">
+                <div class="wave2">
+                    <div class="wave3"></div>
+                </div>
+            </div>
+            
+            
+            <div class="icon" id="weather-cnd">
+                <i class="fa-solid fa-sun"></i>
+            </div>
+            <div class="city">
+                <h2><span>{{city}}</span>,<span>{{country}}</span></h2>
+            </div>
+            <div class="temp">
+                <h2 id="temp-live">{{current_temp}}&deg;C</h2>
+                <p><span>Min {{min_temp}}</span><span>Max{{max_temp}}</span></p>
+            </div>
+            <div class="Date">
+                <p id="date">Monday |5 Aug 4:00PM </p>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const current_date = document.getElementById('date');
+
+    const weather_cpn = document.getElementById('weather-cnd');
+    const temperature = document.getElementById('temp-live');
+
+    const tempStatus = "{{temp_status}}";
+
+    console.log(tempStatus);
+
+    const getCurrentDay = ()=>{
+        let weekday = new Array(7);
+        weekday[0] = "Sun";
+        weekday[1] = "Mon";
+        weekday[2] = "Tue";
+        weekday[3] = "Wed";
+        weekday[4] = "Thu";
+        weekday[5] = "Fri";
+        weekday[6] = "Sat";
+
+        let cr_day = new Date();
+        let day = weekday[cr_day.getDay()];
+        return day;
+    }
+
+    const getCurrentDate = ()=>{
+        let month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+        let d = new Date();
+        let date = d.getDate();
+        let current_month = month[d.getMonth()];
+
+        let cr_date = (`${date} ${current_month} `);
+
+        let hr = d.getHours();
+        let min = d.getMinutes();
+        let time_period = "AM";
+        if(hr > 11){
+            time_period = "PM";
+            if(hr >12 ){ 
+                time_period -= 12
+            } 
+        }
+        if(min < 10){
+            min = "0" + min;
+        }
+        let time =(`${hr}:${min}${time_period}`);
+        return cr_date + " | " + time;
+
+    }
+
+    current_date.innerHTML = getCurrentDay() + " | " + getCurrentDate();
+
+
+
+</script>
+
+</body>
+</html>
